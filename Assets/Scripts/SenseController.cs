@@ -8,7 +8,7 @@ public class SenseController : MonoBehaviour {
 	public GameObject FeelingGO;
 	
 	public enum SenseType {
-		Sight, Hearing, Scent, Feeling
+		Sight, Hearing, Scent, Feeling, None
 	};
 	
 	public bool GetSenseEnabled (SenseType sense) {
