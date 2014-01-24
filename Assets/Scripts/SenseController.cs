@@ -6,7 +6,13 @@ public class SenseController : MonoBehaviour {
 	public GameObject HearingGO;
 	public GameObject ScentGO;
 	public GameObject FeelingGO;
-	
+
+	private static SenseController _singleton;
+
+	public static SenseController Instance {
+		get { return _singleton; }
+	}
+
 	public enum SenseType {
 		Sight, Hearing, Scent, Feeling, None
 	};
@@ -16,6 +22,8 @@ public class SenseController : MonoBehaviour {
 		SetSenseEnabled(SenseType.Hearing, false);
 		SetSenseEnabled(SenseType.Scent, false);
 		SetSenseEnabled(SenseType.Feeling, false);
+
+		_singleton = this;
 	}
 	
 	public bool GetSenseEnabled (SenseType sense) {
