@@ -11,6 +11,13 @@ public class SenseController : MonoBehaviour {
 		Sight, Hearing, Scent, Feeling, None
 	};
 	
+	void Awake () {
+		SetSenseEnabled(SenseType.Sight, false);
+		SetSenseEnabled(SenseType.Hearing, false);
+		SetSenseEnabled(SenseType.Scent, false);
+		SetSenseEnabled(SenseType.Feeling, false);
+	}
+	
 	public bool GetSenseEnabled (SenseType sense) {
 		switch(sense) {
 			case SenseType.Sight:

@@ -41,14 +41,13 @@ public class GameController : MonoBehaviour {
 	
 	private void SetSenseToCurrentSlot (SenseController.SenseType sense) {
 		int otherSlot = (currentSlot == 1)? 0 : 1;
-		
 		if (activeSenses[currentSlot] == sense) {
-			activeSenses[currentSlot] = SenseController.SenseType.None;
 			senseController.SetSenseEnabled(activeSenses[currentSlot], false);
+			activeSenses[currentSlot] = SenseController.SenseType.None;
 		} else if (activeSenses[otherSlot] != sense) {
 			if (activeSenses[currentSlot] != SenseController.SenseType.None) {
-				activeSenses[currentSlot] = SenseController.SenseType.None;
 				senseController.SetSenseEnabled(activeSenses[currentSlot], false);
+				activeSenses[currentSlot] = SenseController.SenseType.None;
 			}
 			activeSenses[currentSlot] = sense;
 			senseController.SetSenseEnabled(sense, true);
