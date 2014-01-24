@@ -1,0 +1,56 @@
+"We don't see things as they are, we see them as we are"
+	
+Mechanics so far:
+	1 character, 5 senses togglable
+	0 or 1 for each sense, maximum of two senses with 1
+	Death only if needed. (example: spikes = death. too dark? no death)
+	Pros and cons of each sense
+		Senses in general
+			Impede
+			Kill
+			Help
+		Sight
+			Good:
+				can see shit
+			On,	hazards:
+				blinding light/total darkness (stuck)
+				delusional sight
+				death
+					highpowered laser
+		Sound
+			Good:
+				echolocation, like, just hearing
+				indicates a path (echo) or a hazard (wooooo)
+			On, hazards:
+				hidden areas with sound
+				screeching
+				distraction (dubstep, false sounds: sound coming from right, look to your right, see nothing)
+				whispering
+				no solid pattern for hazards/goal
+		Smell/Taste
+			Good:
+				can smell the presence of obstacles/goals
+			On, hazards: 
+				poison gas
+		Touch
+			Good:
+				interacting with objects
+				jumping
+			On, hazards: 
+				temperature
+				can die
+					falling off a cliff
+					spikes
+					pain
+
+Tasks
+	Movement
+	Control Scheme
+		Switching between senses
+	Senses
+		Camera layers: one camera "sees" sound, etc
+		
+	Tonight:
+		Sight, Touch
+		We are robots
+		
