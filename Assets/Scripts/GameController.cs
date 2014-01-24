@@ -6,6 +6,9 @@ public class GameController : MonoBehaviour {
 	public SenseController.SenseType[] activeSenses;
 	public int currentSlot;
 
+	private MouseLook[] mouseLooks;
+	private bool _captureCursor = true;
+
 	void Awake() {
 		_singleton = this;
 	}
@@ -18,10 +21,28 @@ public class GameController : MonoBehaviour {
 		
 		senseController = GetComponentInChildren<SenseController>();
 		currentSlot = 0;
+
+		mouseLooks = GetComponentsInChildren<MouseLook>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		/*
+		 * Capturing of the Camera
+		 */
+		if (_captureCursor) {
+			Screen.lockCursor = true;
+			for (int i = 0; i < mouseLooks.Length; i++)
+				mouseLooks[i].enabled = Screen.lockCursor;
+		} else {
+			Screen.lockCursor = false;
+			for (int i = 0; i < mouseLooks.Length; i++)
+				mouseLooks[i].enabled = false;
+		}
+
+		/*
+		 * Sense Controls
+		 */
 		if (Input.GetButtonDown("Toggle Slot")) {
 			currentSlot = (currentSlot == 1)? 0 : 1;
 		}
@@ -60,6 +81,11 @@ public class GameController : MonoBehaviour {
 			activeSenses[0] = activeSenses[1];
 			activeSenses[1] = tempSense;
 		}
+	}
+
+	public bool CaptureCursor {
+		get { return _captureCursor;}
+		set { _captureCursor = value; }
 	}
 
 	private static GameController _singleton;
