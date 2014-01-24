@@ -5,7 +5,11 @@ public class GameController : MonoBehaviour {
 	public SenseController senseController;
 	public SenseController.SenseType[] activeSenses;
 	public int currentSlot;
-	
+
+	void Awake() {
+		_singleton = this;
+	}
+
 	// Use this for initialization
 	void Start () {
 		activeSenses = new SenseController.SenseType[2];
@@ -57,5 +61,11 @@ public class GameController : MonoBehaviour {
 			activeSenses[0] = activeSenses[1];
 			activeSenses[1] = tempSense;
 		}
+	}
+
+	private static GameController _singleton;
+
+	public static GameController Instance {
+		get { return _singleton; }
 	}
 }
