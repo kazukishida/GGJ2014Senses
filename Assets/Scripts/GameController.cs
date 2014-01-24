@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		activeSenses = new SenseController.SenseType[2];
-		activeSenses[0] = SenseController.SenseType.None;
+		activeSenses[0] = SenseController.SenseType.Sight;
 		activeSenses[1] = SenseController.SenseType.None;
 		
 		senseController = GetComponentInChildren<SenseController>();
