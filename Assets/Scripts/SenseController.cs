@@ -11,11 +11,15 @@ public class SenseController : MonoBehaviour {
 		Sight, Hearing, Scent, Feeling, None
 	};
 	
+	private ButtonHandler buttonHandler;
+	
 	void Awake () {
 		//SetSenseEnabled(SenseType.Sight, false);
 		SetSenseEnabled(SenseType.Hearing, false);
 		SetSenseEnabled(SenseType.Scent, false);
 		SetSenseEnabled(SenseType.Feeling, false);
+		
+		buttonHandler = transform.parent.GetComponent<ButtonHandler>();
 	}
 	
 	public bool GetSenseEnabled (SenseType sense) {
@@ -47,9 +51,9 @@ public class SenseController : MonoBehaviour {
 				break;
 			case SenseType.Feeling:
 				FeelingGO.SetActive(active);
-				ButtonHandler b=transform.parent.GetComponent<ButtonHandler>();
-				if(active) b.enabled=true;
-				else b.enabled=false;
+				if (buttonHandler != null) {
+					buttonHandler.enabled = active;
+				}
 				break;
 			default:
 				Debug.Log ("SetSenseEnabled: Invalid sense");
