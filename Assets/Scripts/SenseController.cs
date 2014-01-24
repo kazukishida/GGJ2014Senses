@@ -12,7 +12,7 @@ public class SenseController : MonoBehaviour {
 	};
 	
 	void Awake () {
-		SetSenseEnabled(SenseType.Sight, false);
+		//SetSenseEnabled(SenseType.Sight, false);
 		SetSenseEnabled(SenseType.Hearing, false);
 		SetSenseEnabled(SenseType.Scent, false);
 		SetSenseEnabled(SenseType.Feeling, false);
