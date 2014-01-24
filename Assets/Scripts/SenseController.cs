@@ -47,6 +47,9 @@ public class SenseController : MonoBehaviour {
 				break;
 			case SenseType.Feeling:
 				FeelingGO.SetActive(active);
+				ButtonHandler b=transform.parent.GetComponent<ButtonHandler>();
+				if(active) b.enabled=true;
+				else b.enabled=false;
 				break;
 			default:
 				Debug.Log ("SetSenseEnabled: Invalid sense");
