@@ -14,6 +14,8 @@ public class ScentTrail : MonoBehaviour {
 		splinePath = GetComponent<SplinePath>();
 		nodes = splinePath.GetSplinePath();
 		
+		lineRenderer = GetComponent<LineRenderer>();
+		
 		if (lineRenderer != null) {
 			lineRenderer.SetVertexCount(Mathf.FloorToInt(splinePath.GetNodeCount()));
 		}
