@@ -18,10 +18,13 @@ public class MovementTracker : MonoBehaviour {
 		currentlyTravelled += distanceTravelled;
 		if (currentlyTravelled >= distanceBetweenFoots) {
 			currentlyTravelled -= distanceBetweenFoots;
+
 			if (PlayerController.Instance.senseController.GetSenseEnabled(SenseController.SenseType.Feeling))
 				DrawFoot();
-			else if (PlayerController.Instance.senseController.GetSenseEnabled(SenseController.SenseType.Hearing))
+			else if (PlayerController.Instance.senseController.GetSenseEnabled(SenseController.SenseType.Hearing)) {
 				SoundFoot();
+			}
+			nextPrefab = (nextPrefab + 1) % footstepsPrefab.Length;
 		}
 		prevPosition = transform.position;
 	}
@@ -32,9 +35,7 @@ public class MovementTracker : MonoBehaviour {
 		v+= transform.forward * 0.4f;
 		GameObject g = Instantiate(footstepsPrefab[nextPrefab], v, 
 		                           Quaternion.Euler(new Vector3(90, transform.rotation.eulerAngles.y, 0))) as GameObject;
-		SoundFoot ();
 		Destroy(g, 3f);
-		nextPrefab = (nextPrefab + 1) % footstepsPrefab.Length;
 	}
 
 	public void SoundFoot() {
