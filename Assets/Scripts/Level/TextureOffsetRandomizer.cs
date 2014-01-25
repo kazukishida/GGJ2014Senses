@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TextureOffsetRandomizer : MonoBehaviour {
 	public Shader shader;
+	public string TextureName;
 	public int materialHash;
 	
 	private Material[] materials;
@@ -11,7 +12,7 @@ public class TextureOffsetRandomizer : MonoBehaviour {
 		materials = new Material[4];
 	
 		for (int i = 0; i < 4; i++) {
-			materials[i] = Resources.Load ("Materials/Materials/Tile" + (i+1),
+			materials[i] = Resources.Load ("Materials/Materials/" + TextureName + (i+1),
 											typeof(Material)) as Material;
 		}
 		
