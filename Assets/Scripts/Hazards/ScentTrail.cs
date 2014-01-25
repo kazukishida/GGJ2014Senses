@@ -47,7 +47,7 @@ public class ScentTrail : MonoBehaviour {
 
 			if (Random.Range(0, 50) == 0) {
 				GameObject g = GameObjectPool.Instance.InstantiateAt(sequence.Current, Quaternion.identity);
-				Destroy(g, 1f);
+				g.GetComponent<DelayedDisable>().StartDelayedDisable(1f);
 			}
 
 			segmentStart = sequence.Current;
