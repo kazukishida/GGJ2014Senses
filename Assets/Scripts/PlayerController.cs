@@ -87,22 +87,27 @@ public class PlayerController : MonoBehaviour {
 								hit.transform.parent = PlayerController.Instance.transform;
 								carryingObject.collider.enabled = false;
 								carryingObject.rigidbody.useGravity = false;
-								carryingObject.transform.position += new Vector3(0, 0.25f);
 								Debug.Log ("hurrdurr");
 							}
 						} else if(carryingObject.canActivate) {
 							carryingObject.activate();
 						}
 					}
-				} else {
-					//carryingObject.rigidbody.useGravity = true;
-					carryingObject.collider.enabled = true;
-					carryingObject.rigidbody.useGravity = true;
-					carryingObject.transform.parent = null;
-					carryingObject = null;
 				}
 			}
 		}
+
+		if (Input.GetButtonUp("Interaction")){
+			//carryingObject.rigidbody.useGravity = true;
+			if(carryingObject != null) {
+				carryingObject.collider.enabled = true;
+				carryingObject.rigidbody.useGravity = true;
+				carryingObject.transform.parent = null;
+				carryingObject = null;
+			}
+		}
+			
+		
 	}
 	
 	public bool IsSenseActive (SenseController.SenseType sense) {
