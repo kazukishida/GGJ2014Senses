@@ -27,7 +27,7 @@ public class WorldAudioManager : MonoBehaviour {
 
 	void Awake() {
 	
-		audioSourcePool = FindObjectsOfType(AudioSource) as AudioSource;
+		audioSourcePool = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
 		
 		if(instance != null && instance != this) {
 			Destroy (this.gameObject);
@@ -50,7 +50,7 @@ public class WorldAudioManager : MonoBehaviour {
 		}
 	}
 
-	public static void ToggleAudioSource (bool state) {
+	public void ToggleAudioSource (bool state) {
 		if (audioSourcePool != null) {
 			foreach(AudioSource source in audioSourcePool) {
 				if (!source.gameObject.CompareTag("GlobalAudio")) {
