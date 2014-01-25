@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown("Interaction")) {
+			Debug.Log ("hurrdurr");
 			if(SenseController.Instance.GetSenseEnabled(SenseController.SenseType.Feeling)) {
 				RaycastHit hit;
 				Transform sightCamera = transform.root.FindChild("SenseGroup").FindChild("SightCamera");
@@ -87,22 +88,27 @@ public class PlayerController : MonoBehaviour {
 								hit.transform.parent = PlayerController.Instance.transform;
 								carryingObject.collider.enabled = false;
 								carryingObject.rigidbody.useGravity = false;
-								carryingObject.transform.position += new Vector3(0, 0.25f);
 								Debug.Log ("hurrdurr");
 							}
 						} else if(carryingObject.canActivate) {
 							carryingObject.activate();
 						}
 					}
-				} else {
-					//carryingObject.rigidbody.useGravity = true;
-					carryingObject.collider.enabled = true;
-					carryingObject.rigidbody.useGravity = true;
-					carryingObject.transform.parent = null;
-					carryingObject = null;
 				}
 			}
 		}
+
+		if (Input.GetButtonUp("Interaction")){
+			//carryingObject.rigidbody.useGravity = true;
+			if(carryingObject != null) {
+				carryingObject.collider.enabled = true;
+				carryingObject.rigidbody.useGravity = true;
+				carryingObject.transform.parent = null;
+				carryingObject = null;
+			}
+		}
+			
+		
 	}
 	
 	public SenseController.SenseType GetSenseInSlot (int slot) {
