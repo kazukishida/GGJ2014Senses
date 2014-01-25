@@ -12,6 +12,7 @@ public class WorldAudioManager : MonoBehaviour {
 
 	public AudioSource ambience;
 	
+	public AudioSource goalReachedSFX;
 	public AudioSource footstepSFX;
 	public float footstepSFXvariance = 0.2f;
 	public AudioSource[] audioSourcePool;
@@ -47,9 +48,10 @@ public class WorldAudioManager : MonoBehaviour {
 			ambience.Play();
 
 			footstepSFX = transform.FindChild ("_sfx-footstep").audio;
+			goalReachedSFX = transform.FindChild("_sfx-goalReached").audio;
 
 		} catch(UnityException ue){
-			Debug.Log ("child _amb-source not found \n" + ue.StackTrace);
+			Debug.Log ("child not found \n" + ue.StackTrace);
 			ambience = null;
 		}
 	}
@@ -71,6 +73,11 @@ public class WorldAudioManager : MonoBehaviour {
 		footstepSFX.pitch = Random.Range(1.0f - footstepSFXvariance, 1.0f + footstepSFXvariance);
 		footstepSFX.Play();
 	}
+
+	public void PlayGoalReached(){
+		goalReachedSFX.Play();
+	}	
+
 	// Use this for initialization
 	void Start () {
 	
