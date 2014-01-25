@@ -18,9 +18,9 @@ public class MovementTracker : MonoBehaviour {
 		currentlyTravelled += distanceTravelled;
 		if (currentlyTravelled >= distanceBetweenFoots) {
 			currentlyTravelled -= distanceBetweenFoots;
-			if (SenseController.Instance.GetSenseEnabled(SenseController.SenseType.Feeling))
+			if (PlayerController.Instance.senseController.GetSenseEnabled(SenseController.SenseType.Feeling))
 				DrawFoot();
-			else if (SenseController.Instance.GetSenseEnabled(SenseController.SenseType.Hearing))
+			else if (PlayerController.Instance.senseController.GetSenseEnabled(SenseController.SenseType.Hearing))
 				SoundFoot();
 		}
 		prevPosition = transform.position;
