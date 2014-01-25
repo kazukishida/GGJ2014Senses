@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class GameController : MonoBehaviour {
+	public bool isAlive = true;
+
 	public SenseController senseController;
 	public SenseController.SenseType[] activeSenses;
 	public int currentSlot;
@@ -24,9 +26,15 @@ public class GameController : MonoBehaviour {
 
 		mouseLooks = GetComponentsInChildren<MouseLook>();
 	}
-	
+
+	public void killPlayer() {
+		Debug.Log("You died!");
+		//load checkpoint
+	}
+
 	// Update is called once per frame
 	void Update () {
+
 		/*
 		 * Capturing of the Camera
 		 */

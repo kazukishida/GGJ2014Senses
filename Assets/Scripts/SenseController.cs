@@ -60,6 +60,7 @@ public class SenseController : MonoBehaviour {
 				break;
 			case SenseType.Scent:
 				ScentGO.SetActive(active);
+				OnScentStateChanged(active);
 				break;
 			case SenseType.Feeling:
 				FeelingGO.SetActive(active);
@@ -80,7 +81,14 @@ public class SenseController : MonoBehaviour {
 		GameObject[] g = GameObject.FindGameObjectsWithTag("SightActivatable");
 		for (int i = 0; i < g.Length; i++) {
 			Collider c = g[i].GetComponent<Collider>();
-			if (c != null) c.enabled = newState;
+			if (c != null) c.isTrigger = !newState; //You cannot physically interact with a Trigger; therefore, this has the same consequence as disabling a collider
+		}
+	}
+	public void OnScentStateChanged(bool newState) {
+		GameObject[] g = GameObject.FindGameObjectsWithTag("ScentActivatable");
+		for (int i = 0; i < g.Length; i++) {
+			Collider c = g[i].GetComponent<Collider>();
+			if (c != null) c.isTrigger = !newState;
 		}
 	}
 }
