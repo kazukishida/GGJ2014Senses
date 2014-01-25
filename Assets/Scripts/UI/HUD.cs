@@ -4,11 +4,18 @@ using System.Collections.Generic;
 
 public class HUD : MonoBehaviour {
 	public SenseController senseController;
+	public GUIStyle guiStyle;
+	
+	public Color activeSlotColor;
+	public Color defaultSlotColor;
+	
 	public int margin = 20;
 	private int slotIconSize;
 	
 	Rect senseSlot1;
 	Rect senseSlot2;
+	
+	
 	
 	Dictionary<SenseController.SenseType, Texture2D> iconDict;
 	// Use this for initialization
@@ -39,16 +46,16 @@ public class HUD : MonoBehaviour {
 	
 	void OnGUI () {
 		GUI.backgroundColor = _GetBoxColor(0);
-		GUI.Box (senseSlot1, iconDict[GameController.Instance.GetSenseInSlot(0)]);
+		GUI.Box (senseSlot1, iconDict[GameController.Instance.GetSenseInSlot(0)], guiStyle);
 		GUI.backgroundColor = _GetBoxColor(1);
-		GUI.Box (senseSlot2, iconDict[GameController.Instance.GetSenseInSlot(1)]);
+		GUI.Box (senseSlot2, iconDict[GameController.Instance.GetSenseInSlot(1)], guiStyle);
 	}
 	
 	private Color _GetBoxColor(int slot) {
 		if (GameController.Instance.IsSlotActive(slot)) {
-			return Color.cyan;
+			return activeSlotColor;
 		} else {
-			return Color.white;
+			return defaultSlotColor;
 		}
 	}
 }
