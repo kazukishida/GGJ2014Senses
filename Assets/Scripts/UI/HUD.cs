@@ -52,7 +52,6 @@ public class HUD : MonoBehaviour {
 	}
 	
 	private Color _GetBoxColor(int slot) {
-		Debug.Log (PlayerController.Instance);
 		if (PlayerController.Instance.IsSlotActive(slot)) {
 			return activeSlotColor;
 		} else {

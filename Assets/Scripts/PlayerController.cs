@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 	
 	private void SetSenseToCurrentSlot (SenseController.SenseType sense) {
 		int otherSlot = (currentSlot == 1)? 0 : 1;
-		if (activeSenses[currentSlot] == sense) {
+		if (activeSenses[currentSlot] == sense && activeSenses[otherSlot] != SenseController.SenseType.None) {
 			senseController.SetSenseEnabled(activeSenses[currentSlot], false);
 			activeSenses[currentSlot] = SenseController.SenseType.None;
 		} else if (activeSenses[otherSlot] != sense) {
