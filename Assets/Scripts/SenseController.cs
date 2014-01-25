@@ -19,12 +19,18 @@ public class SenseController : MonoBehaviour {
 	
 	private static ButtonHandler buttonHandler;
 	
+	private Material enabledSkybox;
+	private Material disabledSkybox;
+	
 	void Awake () {
 		//SetSenseEnabled(SenseType.Sight, false);
 		SightGO = transform.Find("SightCamera").gameObject;
 		HearingGO = transform.Find("HearingCamera").gameObject;
 		ScentGO = transform.Find("ScentCamera").gameObject;
 		FeelingGO = transform.Find("FeelingCamera").gameObject;
+
+		enabledSkybox = Resources.Load ("Materials/Materials/Skybox-invert", typeof(Material)) as Material;
+		disabledSkybox = Resources.Load ("Materials/Materials/Skybox", typeof(Material)) as Material;
 
 		SetSenseEnabled(SenseType.Sight, true);
 		SetSenseEnabled(SenseType.Hearing, false);
@@ -33,7 +39,7 @@ public class SenseController : MonoBehaviour {
 
 		buttonHandler = transform.parent.GetComponent<ButtonHandler>();
 		_singleton = this;
-		
+
 		//Debug.Log ("ID: " + GetInstanceID());
 	}
 	
@@ -86,6 +92,12 @@ public class SenseController : MonoBehaviour {
 		for (int i = 0; i < g.Length; i++) {
 			Collider c = g[i].GetComponent<Collider>();
 			if (c != null) c.isTrigger = !newState; //You cannot physically interact with a Trigger; therefore, this has the same consequence as disabling a collider
+		}
+		
+		if (newState) {
+			RenderSettings.skybox = enabledSkybox;
+		} else {
+			RenderSettings.skybox = disabledSkybox;
 		}
 	}
 	public void OnScentStateChanged(bool newState) {
