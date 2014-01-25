@@ -14,8 +14,9 @@ public class BlockCloudGenerator : MonoBehaviour {
 		for (int i = 0; i < blockCount; i++) {
 			blockClouds[i] = Instantiate(prefab, new Vector3(Random.Range(-200, 200), Random.Range(height, height + 100), Random.Range(-200, 200)),
 											Quaternion.identity) as GameObject;
-											
-			blockClouds[i].transform.localScale = new Vector3(Random.Range(3, 10), Random.Range(3, 5), Random.Range(3, 10));
+			
+			float size = Random.Range(3, 10);
+			blockClouds[i].transform.localScale = new Vector3(size, Random.Range(3, 5), size);
 		}
 	}
 	
