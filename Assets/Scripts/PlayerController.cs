@@ -74,31 +74,33 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown("Interaction")) {
-			RaycastHit hit;
-			Transform sightCamera = transform.root.FindChild("SenseGroup").FindChild("SightCamera");
-			//Debug.DrawRay(sightCamera.position, sightCamera.TransformDirection(Vector3.forward));
-			if(carryingObject == null) {
+			if(GetSenseInCurrentSlot(SenseController.SenseType.Feeling)) {
+				RaycastHit hit;
+				Transform sightCamera = transform.root.FindChild("SenseGroup").FindChild("SightCamera");
 				//Debug.DrawRay(sightCamera.position, sightCamera.TransformDirection(Vector3.forward));
-				if(Physics.Raycast(sightCamera.transform.position, sightCamera.transform.TransformDirection(Vector3.forward), out hit, 2)) {
-					carryingObject = hit.transform.root.gameObject.GetComponentInChildren<InteractableObject>();
-					if(carryingObject.canCarry) {
-						if(carryingObject != null) {
-							hit.transform.parent = PlayerController.Instance.transform;
-							carryingObject.collider.enabled = false;
-							carryingObject.rigidbody.useGravity = false;
-							carryingObject.transform.position += new Vector3(0, 0.25f);
-							Debug.Log ("hurrdurr");
+				if(carryingObject == null) {
+					//Debug.DrawRay(sightCamera.position, sightCamera.TransformDirection(Vector3.forward));
+					if(Physics.Raycast(sightCamera.transform.position, sightCamera.transform.TransformDirection(Vector3.forward), out hit, 2)) {
+						carryingObject = hit.transform.root.gameObject.GetComponentInChildren<InteractableObject>();
+						if(carryingObject.canCarry) {
+							if(carryingObject != null) {
+								hit.transform.parent = PlayerController.Instance.transform;
+								carryingObject.collider.enabled = false;
+								carryingObject.rigidbody.useGravity = false;
+								carryingObject.transform.position += new Vector3(0, 0.25f);
+								Debug.Log ("hurrdurr");
+							}
+						} else if(carryingObject.canActivate) {
+							carryingObject.activate();
 						}
-					} else if(carryingObject.canActivate) {
-						carryingObject.activate();
 					}
+				} else {
+					//carryingObject.rigidbody.useGravity = true;
+					carryingObject.collider.enabled = true;
+					carryingObject.rigidbody.useGravity = true;
+					carryingObject.transform.parent = null;
+					carryingObject = null;
 				}
-			} else {
-				//carryingObject.rigidbody.useGravity = true;
-				carryingObject.collider.enabled = true;
-				carryingObject.rigidbody.useGravity = true;
-				carryingObject.transform.parent = null;
-				carryingObject = null;
 			}
 		}
 	}
