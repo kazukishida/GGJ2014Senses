@@ -33,6 +33,8 @@ public class SenseController : MonoBehaviour {
 
 		buttonHandler = transform.parent.GetComponent<ButtonHandler>();
 		_singleton = this;
+		
+		//Debug.Log ("ID: " + GetInstanceID());
 	}
 	
 	public bool GetSenseEnabled (SenseType sense) {
