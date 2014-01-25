@@ -11,7 +11,8 @@ WorldAudioManager.cs
 public class WorldAudioManager : MonoBehaviour {
 
 	public AudioSource ambience;
-	
+
+	public AudioSource changeSenseSFX;
 	public AudioSource goalReachedSFX;
 	public AudioSource footstepSFX;
 	public float footstepSFXvariance = 0.2f;
@@ -54,8 +55,11 @@ public class WorldAudioManager : MonoBehaviour {
 			ambience.Play();
 
 			footstepSFX = transform.FindChild ("_sfx-footstep").audio;
+			changeSenseSFX = transform.FindChild("_sfx-lockSense").audio;
 			goalReachedSFX = transform.FindChild("_sfx-goalReached").audio;
 
+			// adjustments
+			changeSenseSFX.pitch = 1.2f;
 		} catch(UnityException ue){
 			Debug.Log ("child not found \n" + ue.StackTrace);
 			ambience = null;
@@ -83,6 +87,10 @@ public class WorldAudioManager : MonoBehaviour {
 	public void PlayGoalReached(){
 		goalReachedSFX.Play();
 	}	
+
+	public void PlayLockSense(){
+		changeSenseSFX.Play ();
+	}
 
 	private void DistributeDistractions(){
 		DistributeDistractions(0.0f);
