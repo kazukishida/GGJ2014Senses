@@ -44,7 +44,12 @@ public class ScentTrail : MonoBehaviour {
 			if(lineRenderer != null) {
 				lineRenderer.SetPosition(i++, sequence.Current);
 			}
-			
+
+			if (Random.Range(0, 50) == 0) {
+				GameObject g = GameObjectPool.Instance.InstantiateAt(sequence.Current, Quaternion.identity);
+				Destroy(g, 1f);
+			}
+
 			segmentStart = sequence.Current;
 			// prevent infinite loop, when attribute loop == true
 			if (segmentStart == firstPoint) { break; }
