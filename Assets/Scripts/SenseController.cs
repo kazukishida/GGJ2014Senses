@@ -23,7 +23,8 @@ public class SenseController : MonoBehaviour {
 	private Material disabledSkybox;
 	
 	void Awake () {
-		//SetSenseEnabled(SenseType.Sight, false);
+		Debug.Log("Started Sense Controller");
+
 		SightGO = transform.Find("SightCamera").gameObject;
 		HearingGO = transform.Find("HearingCamera").gameObject;
 		ScentGO = transform.Find("ScentCamera").gameObject;
