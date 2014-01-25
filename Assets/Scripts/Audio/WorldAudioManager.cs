@@ -17,7 +17,8 @@ public class WorldAudioManager : MonoBehaviour {
 	public float footstepSFXvariance = 0.2f;
 
 	public AudioSource[] distractionSounds;
-	public float distractionDistributionRange = 30.0f;
+	public float distractionDistributionRange = 50.0f;
+	public float distractionSpawnProbability = 0.6f;
 
 	public AudioSource[] audioSourcePool;
 
@@ -87,28 +88,44 @@ public class WorldAudioManager : MonoBehaviour {
 		DistributeDistractions(0.0f);
 	}
 
-	private void DistributeDistractions(float distanceVariance){
+	public void ResetDistractions(){
 		for(int i = 0; i < distractionSounds.Length; i++){
-			distractionSounds[i].transform.position = 
-				playerPosition + new Vector3(
-								playerPosition.x + Random.Range(
-									-distractionDistributionRange - distanceVariance, distractionDistributionRange + distanceVariance), 
-								playerPosition.y, 
-								playerPosition.z + Random.Range(
-									-distractionDistributionRange - distanceVariance, distractionDistributionRange + distanceVariance)
-								);
-			distractionSounds[i].Play();
+			distractionSounds[i].transform.position = Vector3.zero;
 		}
+	}
+
+	public void DistributeDistractions(float distanceVariance){
+		playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+		for(int i = 0; i < distractionSounds.Length; i++){
+			if(Random.Range (0.0f, 1.0f) <= distractionSpawnProbability){
+				distractionSounds[i].transform.position = 
+					playerPosition + new Vector3(
+									playerPosition.x + Random.Range(
+										-distractionDistributionRange - distanceVariance, distractionDistributionRange + distanceVariance), 
+									playerPosition.y, 
+									playerPosition.z + Random.Range(
+										-distractionDistributionRange - distanceVariance, distractionDistributionRange + distanceVariance)
+									);
+				distractionSounds[i].Play();
+			} else {
+				distractionSounds[i].transform.position = Vector3.down;
+			}
+		}
+	}
+
+	void OnLevelWasLoaded(int level){
+		ResetDistractions();
+		DistributeDistractions();
 	}
 
 	// Use this for initialization
 	void Start () {
-		playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-		DistributeDistractions();
+		// -- remove comment on this to enable sound distractions on first level
+		// DistributeDistractions();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }
