@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameController : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 	public bool isAlive = true;
 
 	public SenseController senseController;
@@ -108,9 +108,9 @@ public class GameController : MonoBehaviour {
 		set { _captureCursor = value; }
 	}
 
-	private static GameController _singleton;
+	private static PlayerController _singleton;
 
-	public static GameController Instance {
+	public static PlayerController Instance {
 		get { return _singleton; }
 	}
 }
