@@ -51,7 +51,7 @@ public class HUD : MonoBehaviour {
 		GUI.Box (senseSlot2, iconDict[PlayerController.Instance.GetSenseInSlot(1)], guiStyle);
 	}
 	
-	private Color _GetBoxColor(int slot) {
+	private Color _GetBoxColor(int slot) {	
 		if (PlayerController.Instance.IsSlotActive(slot)) {
 			return activeSlotColor;
 		} else {
