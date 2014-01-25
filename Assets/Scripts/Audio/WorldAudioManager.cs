@@ -58,7 +58,7 @@ public class WorldAudioManager : MonoBehaviour {
 		if (audioSourcePool != null) {
 			foreach(AudioSource source in audioSourcePool) {
 				if (!source.gameObject.CompareTag("GlobalAudio")) {
-					source.mute = state;
+					source.mute = !state;
 				} 
 			}
 		}
