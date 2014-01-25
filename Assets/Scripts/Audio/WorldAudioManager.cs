@@ -19,8 +19,9 @@ public class WorldAudioManager : MonoBehaviour {
 	public float footstepSFXvariance = 0.2f;
 
 	public AudioSource[] distractionSounds;
-	public float distractionDistributionRange = 50.0f;
+	public float distractionDistributionRange = 60.0f;
 	public float distractionSpawnProbability = 0.6f;
+	public int distractionMaxSpawn = 6;
 
 	public AudioSource[] audioSourcePool;
 
@@ -98,29 +99,43 @@ public class WorldAudioManager : MonoBehaviour {
 		switchSenseSFX.Play();
 	}
 
-	private void DistributeDistractions(){
-		DistributeDistractions(0.0f);
-	}
-
 	public void ResetDistractions(){
 		for(int i = 0; i < distractionSounds.Length; i++){
+			distractionSounds[i].Stop();
 			distractionSounds[i].transform.position = Vector3.zero;
 		}
 	}
 
-	public void DistributeDistractions(float distanceVariance){
+	private void DistributeDistractions(){
+		DistributeDistractions(-1 ,0.0f);
+	}
+
+	private void DistributeDistractions(int amount){
+		DistributeDistractions(amount, 0.0f);
+	}
+
+	public void DistributeDistractions(int amount, float distanceVariance){
+		int spawnSuccess = 0;
+		int i = 0;
 		playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-		for(int i = 0; i < distractionSounds.Length; i++){
+		while(true){
+			i = Random.Range(0, distractionSounds.Length);
 			if(Random.Range (0.0f, 1.0f) <= distractionSpawnProbability){
 				distractionSounds[i].transform.position = 
 					playerPosition + new Vector3(
 									playerPosition.x + Random.Range(
 										-distractionDistributionRange - distanceVariance, distractionDistributionRange + distanceVariance), 
-									playerPosition.y, 
+									0, 
 									playerPosition.z + Random.Range(
 										-distractionDistributionRange - distanceVariance, distractionDistributionRange + distanceVariance)
 									);
 				distractionSounds[i].Play();
+				spawnSuccess += 1;
+				if((amount != -1 && spawnSuccess >= amount) || 
+					spawnSuccess == distractionSounds.Length || 
+					spawnSuccess >= distractionMaxSpawn){
+					break;
+				}
 			} else {
 				distractionSounds[i].transform.position = Vector3.down;
 			}
@@ -129,9 +144,10 @@ public class WorldAudioManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level){
 		// audioSourcePool = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
-
+		Debug.Log("load new level! -- " + level);
 		ResetDistractions();
-		DistributeDistractions();
+		// -- distractions scale linearly in level
+		DistributeDistractions(level);
 	}
 
 	// Use this for initialization
