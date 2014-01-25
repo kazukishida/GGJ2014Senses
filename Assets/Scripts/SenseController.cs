@@ -20,6 +20,10 @@ public class SenseController : MonoBehaviour {
 		ScentGO = transform.Find("ScentCamera").gameObject;
 		FeelingGO = transform.Find("FeelingCamera").gameObject;
 		
+		SetSenseEnabled(SenseType.Sight, false);
+		SetSenseEnabled(SenseType.Hearing, false);
+		SetSenseEnabled(SenseType.Feeling, false);
+		
 		buttonHandler = transform.parent.GetComponent<ButtonHandler>();
 	}
 	
