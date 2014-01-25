@@ -13,6 +13,7 @@ public class WorldAudioManager : MonoBehaviour {
 	public AudioSource ambience;
 	
 	public AudioSource footstepSFX;
+	public float footstepSFXvariance = 0.2f;
 	public AudioSource[] audioSourcePool;
 
 	private static WorldAudioManager instance = null;
@@ -67,6 +68,7 @@ public class WorldAudioManager : MonoBehaviour {
 		footstepSFX.pan = pan;
 
 		footstepSFX.Stop();
+		footstepSFX.pitch = Random.Range(1.0f - footstepSFXvariance, 1.0f + footstepSFXvariance);
 		footstepSFX.Play();
 	}
 	// Use this for initialization

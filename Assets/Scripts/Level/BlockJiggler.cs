@@ -10,9 +10,9 @@ public class BlockJiggler : MonoBehaviour {
 				int dir = Random.Range(0, 2) == 0 ? 1 : -1;
 				Transform t = g[i].transform;
 				if (!Physics.Raycast(t.position, Vector3.up * dir, t.localScale.y))
-					t.position += new Vector3(0, t.localScale.y * Random.Range(1, 4) * 0.2f) * dir;
+					t.position += new Vector3(0, t.localScale.y * Random.Range(1, 3) * 0.2f) * dir;
 				else
-					t.position -= new Vector3(0, t.localScale.y * Random.Range(1, 4) * 0.2f) * dir;
+					t.position -= new Vector3(0, t.localScale.y * Random.Range(1, 3) * 0.2f) * dir;
 			}
 		}
 	}
