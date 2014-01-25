@@ -4,11 +4,11 @@ using System.Collections;
 public class Obstacle : MonoBehaviour {
 	public SenseController.SenseType type;
 	public bool isLethal;
-	private Collider collider;
-
+	private Collider obstacleCollider;
+	
 	void Start() {
-		collider = this.GetComponentInChildren<Collider>();
-		collider.isTrigger = isLethal; //turn collider into a trigger when the obstacle is lethal
+		obstacleCollider = this.GetComponentInChildren<Collider>();
+		obstacleCollider.isTrigger = isLethal; //turn collider into a trigger when the obstacle is lethal
 	}
 
 	void Update() {
