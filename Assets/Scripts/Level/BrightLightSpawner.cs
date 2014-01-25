@@ -13,6 +13,7 @@ public class BrightLightSpawner : MonoBehaviour {
 			GameObject g = Instantiate(lightQuad, transform.position + 
 			                           new Vector3(Random.Range(-0.5f, 0.5f) * scale.x, Random.Range(-0.5f, 0.5f) * scale.y, Random.Range(-0.5f, 0.5f) * scale.z), 
 			                           Quaternion.identity) as GameObject;
+			g.transform.parent = transform;
 		}
 	}
 	

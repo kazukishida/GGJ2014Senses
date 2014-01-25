@@ -17,12 +17,19 @@ public class SenseController : MonoBehaviour {
 		Sight, Hearing, Scent, Feeling, None
 	};
 	
+	private static ButtonHandler buttonHandler;
+	
 	void Awake () {
+		//SetSenseEnabled(SenseType.Sight, false);
+		SightGO = transform.Find("SightCamera").gameObject;
+		HearingGO = transform.Find("HearingCamera").gameObject;
+		ScentGO = transform.Find("ScentCamera").gameObject;
+		FeelingGO = transform.Find("FeelingCamera").gameObject;
+		
 		SetSenseEnabled(SenseType.Sight, false);
 		SetSenseEnabled(SenseType.Hearing, false);
-		SetSenseEnabled(SenseType.Scent, false);
 		SetSenseEnabled(SenseType.Feeling, false);
-
+		buttonHandler = transform.parent.GetComponent<ButtonHandler>();
 		_singleton = this;
 	}
 	
@@ -55,6 +62,9 @@ public class SenseController : MonoBehaviour {
 				break;
 			case SenseType.Feeling:
 				FeelingGO.SetActive(active);
+				if (buttonHandler != null) {
+					buttonHandler.enabled = active;
+				}
 				break;
 			default:
 				Debug.Log ("SetSenseEnabled: Invalid sense");
