@@ -2,22 +2,23 @@
 using System.Collections;
 
 public class SenseController : MonoBehaviour {
-	public GameObject SightGO;
-	public GameObject HearingGO;
-	public GameObject ScentGO;
-	public GameObject FeelingGO;
+	public static GameObject SightGO;
+	public static GameObject HearingGO;
+	public static GameObject ScentGO;
+	public static GameObject FeelingGO;
 	
 	public enum SenseType {
 		Sight, Hearing, Scent, Feeling, None
 	};
 	
-	private ButtonHandler buttonHandler;
+	private static ButtonHandler buttonHandler;
 	
 	void Awake () {
 		//SetSenseEnabled(SenseType.Sight, false);
-		SetSenseEnabled(SenseType.Hearing, false);
-		SetSenseEnabled(SenseType.Scent, false);
-		SetSenseEnabled(SenseType.Feeling, false);
+		SightGO = transform.Find("SightCamera").gameObject;
+		HearingGO = transform.Find("HearingCamera").gameObject;
+		ScentGO = transform.Find("ScentCamera").gameObject;
+		FeelingGO = transform.Find("FeelingCamera").gameObject;
 		
 		buttonHandler = transform.parent.GetComponent<ButtonHandler>();
 	}
