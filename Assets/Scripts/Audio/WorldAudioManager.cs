@@ -13,6 +13,7 @@ public class WorldAudioManager : MonoBehaviour {
 	public AudioSource ambience;
 
 	public AudioSource changeSenseSFX;
+	public AudioSource switchSenseSFX;
 	public AudioSource goalReachedSFX;
 	public AudioSource footstepSFX;
 	public float footstepSFXvariance = 0.2f;
@@ -85,11 +86,16 @@ public class WorldAudioManager : MonoBehaviour {
 	}
 
 	public void PlayGoalReached(){
+		goalReachedSFX.pitch = Random.Range (0.95f, 1.05f);
 		goalReachedSFX.Play();
 	}	
 
 	public void PlayLockSense(){
 		changeSenseSFX.Play ();
+	}
+
+	public void PlaySwitchSlotSense(){
+		switchSenseSFX.Play();
 	}
 
 	private void DistributeDistractions(){

@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour {
 		 */
 		if (Input.GetButtonDown("Toggle Slot")) {
 			currentSlot = (currentSlot == 1)? 0 : 1;
+			WorldAudioManager.Instance.PlaySwitchSlotSense();
 		}
 		
 		if (Input.GetButtonDown("Sight")) {
