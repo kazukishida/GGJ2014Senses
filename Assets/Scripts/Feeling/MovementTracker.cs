@@ -12,8 +12,11 @@ public class MovementTracker : MonoBehaviour {
 
 	public int drawFootsBeforeStepSound = 8;
 
+	private CharacterController cc;
+
 	void Start () {
 		prevPosition = transform.position;
+		cc = GetComponent<CharacterController>();
 	}
 	
 	void Update () {
@@ -32,6 +35,7 @@ public class MovementTracker : MonoBehaviour {
 
 		}
 		prevPosition = transform.position;
+		if(cc.velocity.magnitude < 0.2f) stepCounter = 0;
 	}
 
 	public void DrawFoot() {
@@ -47,12 +51,14 @@ public class MovementTracker : MonoBehaviour {
 
 	public void SoundFoot() {
 		// ERWIN PUT SOUND CODE HERE.
-		if(stepCounter % drawFootsBeforeStepSound == 0){
-			WorldAudioManager.Instance.PlayFootstep(-0.4f);
-			//Debug.Log("PLAYone!");
-		} else if (stepCounter % (drawFootsBeforeStepSound/2) == 0){
-			WorldAudioManager.Instance.PlayFootstep(0.4f);
-			//Debug.Log("Playtwo!");
+		if(cc.isGrounded){
+			if(stepCounter % drawFootsBeforeStepSound == 0){
+				WorldAudioManager.Instance.PlayFootstep(-0.3f);
+				//Debug.Log("PLAYone!");
+			} else if (stepCounter % (drawFootsBeforeStepSound/2) == 0){
+				WorldAudioManager.Instance.PlayFootstep(0.3f);
+				//Debug.Log("Playtwo!");
+			}
 		}
 	}
 }
