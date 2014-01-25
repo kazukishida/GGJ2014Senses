@@ -11,6 +11,8 @@ WorldAudioManager.cs
 public class WorldAudioManager : MonoBehaviour {
 
 	public AudioSource ambience;
+	
+	public AudioSource[] audioSourcePool;
 
 	private static WorldAudioManager instance = null;
 	public static WorldAudioManager Instance {
@@ -24,6 +26,9 @@ public class WorldAudioManager : MonoBehaviour {
 	}
 
 	void Awake() {
+	
+		audioSourcePool = FindObjectsOfType(AudioSource) as AudioSource;
+		
 		if(instance != null && instance != this) {
 			Destroy (this.gameObject);
 			return;
@@ -45,6 +50,15 @@ public class WorldAudioManager : MonoBehaviour {
 		}
 	}
 
+	public static void ToggleAudioSource (bool state) {
+		if (audioSourcePool != null) {
+			foreach(AudioSource source in audioSourcePool) {
+				if (!source.gameObject.CompareTag("GlobalAudio")) {
+					source.mute = state;
+				} 
+			}
+		}
+	} 
 
 	// Use this for initialization
 	void Start () {

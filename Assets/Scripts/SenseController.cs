@@ -67,6 +67,7 @@ public class SenseController : MonoBehaviour {
 				break;
 			case SenseType.Hearing:
 				HearingGO.SetActive(active);
+				WorldAudioManager.ToggleAudioSource(active);
 				break;
 			case SenseType.Scent:
 				ScentGO.SetActive(active);
