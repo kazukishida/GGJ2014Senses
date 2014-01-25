@@ -53,6 +53,7 @@ public class SenseController : MonoBehaviour {
 		switch(sense) {
 			case SenseType.Sight:
 				SightGO.SetActive(active);
+				OnSightStateChanged(active);
 				break;
 			case SenseType.Hearing:
 				HearingGO.SetActive(active);
@@ -69,6 +70,17 @@ public class SenseController : MonoBehaviour {
 			default:
 				Debug.Log ("SetSenseEnabled: Invalid sense");
 				break;
+		}
+	}
+
+	/*
+	 * Activation Functions
+	 */
+	public void OnSightStateChanged(bool newState) {
+		GameObject[] g = GameObject.FindGameObjectsWithTag("SightActivatable");
+		for (int i = 0; i < g.Length; i++) {
+			Collider c = g[i].GetComponent<Collider>();
+			if (c != null) c.enabled = newState;
 		}
 	}
 }
