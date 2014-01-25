@@ -32,11 +32,19 @@ public class MovementTracker : MonoBehaviour {
 		v+= transform.forward * 0.4f;
 		GameObject g = Instantiate(footstepsPrefab[nextPrefab], v, 
 		                           Quaternion.Euler(new Vector3(90, transform.rotation.eulerAngles.y, 0))) as GameObject;
+		SoundFoot ();
 		Destroy(g, 3f);
 		nextPrefab = (nextPrefab + 1) % footstepsPrefab.Length;
 	}
 
 	public void SoundFoot() {
 		// ERWIN PUT SOUND CODE HERE.
+		if(nextPrefab % 2 == 0){
+			WorldAudioManager.Instance.PlayFootstep(-1.0f);
+			Debug.Log("PLAYone!");
+		} else {
+			WorldAudioManager.Instance.PlayFootstep(1.0f);
+			Debug.Log("Playtwo!");
+		}
 	}
 }

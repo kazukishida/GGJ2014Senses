@@ -12,13 +12,14 @@ public class WorldAudioManager : MonoBehaviour {
 
 	public AudioSource ambience;
 	
+	public AudioSource footstepSFX;
 	public AudioSource[] audioSourcePool;
 
 	private static WorldAudioManager instance = null;
 	public static WorldAudioManager Instance {
 		get {
 			if (instance == null){
-				GameObject go = Instantiate (Resources.Load<GameObject>("Audio/_WorldAudioManager")) as GameObject;
+				GameObject go = Instantiate (Resources.Load<GameObject>("Prefabs/Level/Audio/__WorldAudioManager")) as GameObject;
 				instance = go.GetComponent<WorldAudioManager>();
 			}
 			return instance;
@@ -44,6 +45,8 @@ public class WorldAudioManager : MonoBehaviour {
 			ambience.loop = true;
 			ambience.Play();
 
+			footstepSFX = transform.FindChild ("_sfx-footstep").audio;
+
 		} catch(UnityException ue){
 			Debug.Log ("child _amb-source not found \n" + ue.StackTrace);
 			ambience = null;
@@ -60,6 +63,12 @@ public class WorldAudioManager : MonoBehaviour {
 		}
 	} 
 
+	public void PlayFootstep(float pan){
+		footstepSFX.pan = pan;
+
+		footstepSFX.Stop();
+		footstepSFX.Play();
+	}
 	// Use this for initialization
 	void Start () {
 	
