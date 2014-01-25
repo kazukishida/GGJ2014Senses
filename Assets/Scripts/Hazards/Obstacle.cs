@@ -16,8 +16,10 @@ public class Obstacle : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if(other.gameObject.tag == "Player") {
-			PlayerController.Instance.killPlayer();
+		if(isLethal) {
+			if(other.gameObject.tag == "Player") {
+				PlayerController.Instance.killPlayer();
+			}
 		}
 	}
 }
