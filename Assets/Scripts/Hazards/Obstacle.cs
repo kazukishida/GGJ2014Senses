@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Obstacle : MonoBehaviour {
+	public SenseController.SenseType type;
 	public bool isLethal;
 	private Collider collider;
 
@@ -16,7 +17,7 @@ public class Obstacle : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "Player") {
-			GameController.Instance.killPlayer();
+			PlayerController.Instance.killPlayer();
 		}
 	}
 }

@@ -46,13 +46,13 @@ public class HUD : MonoBehaviour {
 	
 	void OnGUI () {
 		GUI.backgroundColor = _GetBoxColor(0);
-		GUI.Box (senseSlot1, iconDict[GameController.Instance.GetSenseInSlot(0)], guiStyle);
+		GUI.Box (senseSlot1, iconDict[PlayerController.Instance.GetSenseInSlot(0)], guiStyle);
 		GUI.backgroundColor = _GetBoxColor(1);
-		GUI.Box (senseSlot2, iconDict[GameController.Instance.GetSenseInSlot(1)], guiStyle);
+		GUI.Box (senseSlot2, iconDict[PlayerController.Instance.GetSenseInSlot(1)], guiStyle);
 	}
 	
 	private Color _GetBoxColor(int slot) {
-		if (GameController.Instance.IsSlotActive(slot)) {
+		if (PlayerController.Instance.IsSlotActive(slot)) {
 			return activeSlotColor;
 		} else {
 			return defaultSlotColor;

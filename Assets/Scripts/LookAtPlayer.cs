@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LookAtPlayer : MonoBehaviour {
@@ -6,7 +6,7 @@ public class LookAtPlayer : MonoBehaviour {
 	public Transform lookAt;
 
 	void Start () {
-		lookAt = GameController.Instance.transform;
+		lookAt = PlayerController.Instance.transform;
 	}
 	
 	void Update () {
