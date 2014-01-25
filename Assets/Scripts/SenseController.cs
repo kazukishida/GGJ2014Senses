@@ -70,7 +70,6 @@ public class SenseController : MonoBehaviour {
 				break;
 			case SenseType.Scent:
 				ScentGO.SetActive(active);
-				OnScentStateChanged(active);
 				break;
 			case SenseType.Feeling:
 				FeelingGO.SetActive(active);
@@ -98,13 +97,6 @@ public class SenseController : MonoBehaviour {
 			RenderSettings.skybox = enabledSkybox;
 		} else {
 			RenderSettings.skybox = disabledSkybox;
-		}
-	}
-	public void OnScentStateChanged(bool newState) {
-		GameObject[] g = GameObject.FindGameObjectsWithTag("ScentActivatable");
-		for (int i = 0; i < g.Length; i++) {
-			Collider c = g[i].GetComponent<Collider>();
-			if (c != null) c.isTrigger = !newState;
 		}
 	}
 }

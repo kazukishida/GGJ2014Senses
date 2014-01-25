@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void killPlayer() {
-		Debug.Log("You died!");
+		//Debug.Log("You died!");
+		Application.LoadLevel(Application.loadedLevel);
 		//load checkpoint
 	}
 
