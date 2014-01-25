@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown("Interaction")) {
-			if(GetSenseInCurrentSlot(SenseController.SenseType.Feeling)) {
+			if(SenseController.Instance.GetSenseEnabled(SenseController.SenseType.Feeling)) {
 				RaycastHit hit;
 				Transform sightCamera = transform.root.FindChild("SenseGroup").FindChild("SightCamera");
 				//Debug.DrawRay(sightCamera.position, sightCamera.TransformDirection(Vector3.forward));
