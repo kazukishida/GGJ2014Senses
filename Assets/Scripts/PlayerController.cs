@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown("Interaction")) {
-			if(GetSenseInCurrentSlot(SenseController.SenseType.Feeling)) {
+			if(IsSenseActive(SenseController.SenseType.Feeling)) {
 				RaycastHit hit;
 				Transform sightCamera = transform.root.FindChild("SenseGroup").FindChild("SightCamera");
 				//Debug.DrawRay(sightCamera.position, sightCamera.TransformDirection(Vector3.forward));
@@ -103,6 +103,10 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		}
+	}
+	
+	public bool IsSenseActive (SenseController.SenseType sense) {
+		return (activeSenses[0] == sense || activeSenses[1] == sense);
 	}
 	
 	public SenseController.SenseType GetSenseInSlot (int slot) {
