@@ -64,6 +64,18 @@ public class GameController : MonoBehaviour {
 		}
 	}
 	
+	public SenseController.SenseType GetSenseInSlot (int slot) {
+		return activeSenses[slot];
+	}
+	
+	public SenseController.SenseType GetSenseInCurrentSlot () {
+		return activeSenses[currentSlot];
+	}
+	
+	public bool IsSlotActive (int slot) {
+		return (currentSlot == slot);
+	}
+	
 	private void SetSenseToCurrentSlot (SenseController.SenseType sense) {
 		int otherSlot = (currentSlot == 1)? 0 : 1;
 		if (activeSenses[currentSlot] == sense) {
