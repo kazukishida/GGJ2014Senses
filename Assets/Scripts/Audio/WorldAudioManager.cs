@@ -65,7 +65,7 @@ public class WorldAudioManager : MonoBehaviour {
 	public void ToggleAudioSource (bool state) {
 		if (audioSourcePool != null) {
 			foreach(AudioSource source in audioSourcePool) {
-				if (!source.gameObject.CompareTag("GlobalAudio")) {
+				if (source != null && !source.gameObject.CompareTag("GlobalAudio")) {
 					source.mute = !state;
 				} 
 			}
@@ -114,6 +114,8 @@ public class WorldAudioManager : MonoBehaviour {
 	}
 
 	void OnLevelWasLoaded(int level){
+		// audioSourcePool = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+
 		ResetDistractions();
 		DistributeDistractions();
 	}
