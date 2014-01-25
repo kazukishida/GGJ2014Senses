@@ -2,6 +2,11 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
+	public GameObject sightCamera;
+	public GameObject hearingCamera;
+
+	public AudioClip voiceClip;
+
 	public bool isAlive = true;
 
 	public SenseController senseController;
@@ -19,6 +24,10 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		sightCamera = GameObject.Find("SightCamera");
+		hearingCamera = GameObject.Find("HearingCamera");
+		Debug.Log(hearingCamera);
+
 		activeSenses = new SenseController.SenseType[2];
 		activeSenses[0] = SenseController.SenseType.Sight;
 		activeSenses[1] = SenseController.SenseType.None;
@@ -105,6 +114,30 @@ public class PlayerController : MonoBehaviour {
 				carryingObject.transform.parent = null;
 				carryingObject = null;
 			}
+		}
+
+		if(Input.GetButtonDown("Shout")) {
+			//GameObject hearingCamera = GameObject.Find("HearingCamera");
+
+			audio.clip = Microphone.Start("", false, 99, AudioSettings.outputSampleRate);
+
+
+		}
+
+		if(Input.GetButtonUp("Shout")) {
+
+			Microphone.End("");
+
+			voiceClip = AudioClip.Create("MyVoice", 44100, 1, 44100, true, false);
+
+			float[] samples = new float[44100];
+			audio.clip.GetData(samples, 0);
+			
+			voiceClip.SetData(samples, 0);
+			audio.clip = voiceClip;
+
+			audio.PlayOneShot(voiceClip);
+
 		}
 			
 		
