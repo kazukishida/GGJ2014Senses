@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class ScentTrail : MonoBehaviour {
 	public SplinePath splinePath;
 	public LineRenderer lineRenderer;
+	public GameObject smokePrefab;
 	
 	private IEnumerable<Vector3> nodes;
 	// Use this for initialization
@@ -19,14 +20,20 @@ public class ScentTrail : MonoBehaviour {
 		if (lineRenderer != null) {
 			lineRenderer.SetVertexCount(Mathf.FloorToInt(splinePath.GetNodeCount()));
 		}
+
+		GenerateSmoke();
+//		int numParticles = (splinePath.GetNodeCount() / splinePath.betweenNodeCount) * 10;
+//		for (int i = 0; i < splinePath.GetNodeCount(); i++) {
+//			GameObject g = Instantiate(smokePrefab, 
+//		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		DrawSmoke();
+//		DrawSmoke();
 	}
 	
-	private void DrawSmoke () {
+	private void GenerateSmoke () {
 		IEnumerator<Vector3> sequence = nodes.GetEnumerator();
 		Vector3 firstPoint = sequence.Current;
 		Vector3 segmentStart = firstPoint;
@@ -40,14 +47,19 @@ public class ScentTrail : MonoBehaviour {
 		
 		// use "for in" syntax instead of sequence.MoveNext() when convenient
 		while (sequence.MoveNext()) {
-			
-			if(lineRenderer != null) {
-				lineRenderer.SetPosition(i++, sequence.Current);
+			/* 
+			 * Smoke Particles
+			 */
+			if (Random.Range(0, splinePath.betweenNodeCount / 30) == 0) {
+				GameObject g = Instantiate(smokePrefab, sequence.Current, Quaternion.identity) as GameObject;
+				g.transform.parent = transform;
 			}
 
-			if (Random.Range(0, 50) == 0) {
-				GameObject g = GameObjectPool.Instance.InstantiateAt(sequence.Current, Quaternion.identity);
-				g.GetComponent<DelayedDisable>().StartDelayedDisable(1f);
+			/*
+			 * Line Renderer
+			 */
+			if(lineRenderer != null) {
+				lineRenderer.SetPosition(i++, sequence.Current);
 			}
 
 			segmentStart = sequence.Current;
