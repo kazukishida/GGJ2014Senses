@@ -11,6 +11,11 @@ public class PermissionsController : MonoBehaviour {
 
 	public static PermissionsController Instance {
 		get {
+			if(_singleton == null) {
+				GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Config/PermissionsControllerObject")) as GameObject;
+				go.name = "PermissionsControllerObject";
+				_singleton = go.GetComponent<PermissionsController>();
+			}
 			DontDestroyOnLoad(GameObject.Find("PermissionsControllerObject"));
 			return _singleton;
 		}

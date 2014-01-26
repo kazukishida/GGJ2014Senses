@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	private MouseLook[] mouseLooks;
 	private bool _captureCursor = true;
 
-	private InteractableObject carryingObject = null;
+	public InteractableObject carryingObject = null;
 	
 	public float defaultDeathBound = -7;
 	public Dictionary<int, float> deathBoundOverride;
