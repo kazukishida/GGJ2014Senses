@@ -14,6 +14,8 @@ public class HUD : MonoBehaviour {
 	public int margin = 20;
 	private int slotIconSize;
 	
+	public bool visible;
+	
 	Rect senseSlot1;
 	Rect senseSlot2;
 	
@@ -39,19 +41,18 @@ public class HUD : MonoBehaviour {
 		senseSlot1 = new Rect(margin, Screen.height - margin - slotIconSize, slotIconSize, slotIconSize);
 		senseSlot2 = new Rect(margin + slotIconSize + 10, Screen.height - margin - slotIconSize,
 								slotIconSize, slotIconSize);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+								
+		visible = true;
 	}
 	
 	void OnGUI () {
-		GUI.DrawTexture(new Rect((Screen.width/2), (Screen.height/2), 8, 8), reticuleTexture);
-		GUI.backgroundColor = _GetBoxColor(0);
-		GUI.Box (senseSlot1, iconDict[PlayerController.Instance.GetSenseInSlot(0)], guiStyle);
-		GUI.backgroundColor = _GetBoxColor(1);
-		GUI.Box (senseSlot2, iconDict[PlayerController.Instance.GetSenseInSlot(1)], guiStyle);
+		if(visible) {
+				GUI.DrawTexture(new Rect((Screen.width/2), (Screen.height/2), 8, 8), reticuleTexture);
+				GUI.backgroundColor = _GetBoxColor(0);
+				GUI.Box (senseSlot1, iconDict[PlayerController.Instance.GetSenseInSlot(0)], guiStyle);
+				GUI.backgroundColor = _GetBoxColor(1);
+				GUI.Box (senseSlot2, iconDict[PlayerController.Instance.GetSenseInSlot(1)], guiStyle);
+		}
 	}
 	
 	private Color _GetBoxColor(int slot) {	
