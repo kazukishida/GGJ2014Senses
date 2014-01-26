@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetButtonDown("Shout")) {
 			Transform sightCamera = transform.root.FindChild("SenseGroup").FindChild("SightCamera");
 
-			Physics.Raycast(sightCamera.position, sightCamera.TransformDirection(Vector3.forward), out echoHit, 40f);
+			Physics.Raycast(sightCamera.position, sightCamera.TransformDirection(Vector3.forward), out echoHit, 100f);
 			echoDistance = echoHit.distance;
 
 			audio.clip = Microphone.Start("", false, 99, AudioSettings.outputSampleRate);
