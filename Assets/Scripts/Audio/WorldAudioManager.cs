@@ -53,7 +53,7 @@ public class WorldAudioManager : MonoBehaviour {
 		// --- AWAKE INITZZ HERE
 		try {
 			ambience = transform.FindChild("_amb-source").audio;
-			ambience.volume=0.07f;
+			ambience.volume=0.5f;
 			ambience.loop = true;
 			ambience.Play();
 
