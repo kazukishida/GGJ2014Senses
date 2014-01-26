@@ -103,6 +103,10 @@ public class PlayerController : MonoBehaviour {
 			SetSenseToCurrentSlot(SenseController.SenseType.Feeling);
 		}
 
+		if(Input.GetButtonDown("Reset Game")) {
+			Application.LoadLevel(0);
+		}
+
 		if (Input.GetButtonDown("Interaction")) {
 			if(IsSenseActive(SenseController.SenseType.Feeling)) {
 				RaycastHit hit;
