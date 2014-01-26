@@ -53,4 +53,14 @@ Tasks
 	Tonight:
 		Sight, Touch
 		We are robots
-		
+
+Assets
+	3D
+		[x] Spikes (Chrysalis horn style, silver, white, clean) 
+		[x] Button (cylinder)
+		[x] Ramp: 1x1x1 cube, slice
+		[x] Edge Ramp
+	2D Textures
+		Walls
+		Floor-tile texture
+		Normal Maps for all textures
