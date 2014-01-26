@@ -53,7 +53,7 @@ public class WorldAudioManager : MonoBehaviour {
 		// --- AWAKE INITZZ HERE
 		try {
 			ambience = transform.FindChild("_amb-source").audio;
-
+			ambience.volume=0.07f;
 			ambience.loop = true;
 			ambience.Play();
 
@@ -61,7 +61,6 @@ public class WorldAudioManager : MonoBehaviour {
 			changeSenseSFX = transform.FindChild("_sfx-lockSense").audio;
 			goalReachedSFX = transform.FindChild("_sfx-goalReached").audio;
 			chimeSFX = transform.FindChild("_sfx-chime").audio;
-
 			// adjustments
 			changeSenseSFX.pitch = 1.2f;
 		} catch(UnityException ue){
