@@ -40,7 +40,7 @@ public class MovementTracker : MonoBehaviour {
 
 	public void DrawFoot() {
 		Vector3 v = transform.position;
-		v.y = 0;
+		v.y = 0.05f;
 		v+= transform.forward * 0.4f;
 		GameObject g = Instantiate(footstepsPrefab[nextPrefab], v, 
 		                           Quaternion.Euler(new Vector3(90, transform.rotation.eulerAngles.y, 0))) as GameObject;

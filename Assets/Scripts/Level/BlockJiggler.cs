@@ -15,9 +15,12 @@ public class BlockJiggler : MonoBehaviour {
 					t.position -= new Vector3(0, t.localScale.y * Random.Range(1, 3) * 0.2f) * dir;
 			}
 		}
-	}
-	
-	void Update () {
-	
+
+		for (int i = 0; i < g.Length; i++) {
+			BoxCollider b = g[i].GetComponent<BoxCollider>();
+			Vector3 v = b.size;
+			v.y *= 2f;
+			b.size = v;
+		}
 	}
 }
