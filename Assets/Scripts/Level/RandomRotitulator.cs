@@ -5,6 +5,7 @@ public class RandomRotitulator : MonoBehaviour {
 
 	private float time;
 	private float rotSpeed;
+	public bool riseUp;
 
 	void Start() {
 		time = Time.time;
@@ -13,7 +14,8 @@ public class RandomRotitulator : MonoBehaviour {
 
 	void Update() {
 		// Slowly move it upwards
-		transform.position += Vector3.up * Time.deltaTime * 0.25f;
+		if (riseUp)
+			transform.position += Vector3.up * Time.deltaTime * 0.25f;
 	}
 
 	void LateUpdate () {
