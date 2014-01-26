@@ -28,11 +28,14 @@ public class PlayerController : MonoBehaviour {
 		sightCamera = GameObject.Find("SightCamera");
 		hearingCamera = GameObject.Find("HearingCamera");
 
+		senseController = GetComponentInChildren<SenseController>();
+
 		activeSenses = new SenseController.SenseType[2];
-		activeSenses[0] = SenseController.SenseType.Sight;
+		
+		activeSenses[0] = senseController.startWithNoSense? 
+								SenseController.SenseType.None : SenseController.SenseType.Sight;
 		activeSenses[1] = SenseController.SenseType.None;
 		
-		senseController = GetComponentInChildren<SenseController>();
 		currentSlot = 0;
 
 		mouseLooks = GetComponentsInChildren<MouseLook>();

@@ -6,6 +6,8 @@ public class SenseController : MonoBehaviour {
 	public GameObject HearingGO;
 	public GameObject ScentGO;
 	public GameObject FeelingGO;
+	
+	public bool startWithNoSense = false;
 
 	private static SenseController _singleton;
 
@@ -30,8 +32,8 @@ public class SenseController : MonoBehaviour {
 
 		enabledSkybox = Resources.Load ("Materials/Materials/Skybox-invert", typeof(Material)) as Material;
 		disabledSkybox = Resources.Load ("Materials/Materials/Skybox", typeof(Material)) as Material;
-
-		SetSenseEnabled(SenseType.Sight, true);
+	
+		SetSenseEnabled(SenseType.Sight, !startWithNoSense);
 		SetSenseEnabled(SenseType.Hearing, false);
 		SetSenseEnabled(SenseType.Feeling, false);
 		SetSenseEnabled(SenseType.Scent, false);
