@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		sightCamera = GameObject.Find("SightCamera");
 		hearingCamera = GameObject.Find("HearingCamera");
-		Debug.Log(hearingCamera);
 
 		activeSenses = new SenseController.SenseType[2];
 		activeSenses[0] = SenseController.SenseType.Sight;
