@@ -8,7 +8,9 @@ public class HUD : MonoBehaviour {
 	
 	public Color activeSlotColor;
 	public Color defaultSlotColor;
-	
+
+	public Texture reticuleTexture;	
+
 	public int margin = 20;
 	private int slotIconSize;
 	
@@ -45,6 +47,7 @@ public class HUD : MonoBehaviour {
 	}
 	
 	void OnGUI () {
+		GUI.DrawTexture(new Rect((Screen.width/2), (Screen.height/2), 8, 8), reticuleTexture);
 		GUI.backgroundColor = _GetBoxColor(0);
 		GUI.Box (senseSlot1, iconDict[PlayerController.Instance.GetSenseInSlot(0)], guiStyle);
 		GUI.backgroundColor = _GetBoxColor(1);

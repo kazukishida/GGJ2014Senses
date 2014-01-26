@@ -40,7 +40,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void killPlayer() {
-		Debug.Log("You died!");
+		//Debug.Log("You died!");
+		Application.LoadLevel(Application.loadedLevel);
 		//load checkpoint
 	}
 
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour {
 		 */
 		if (Input.GetButtonDown("Toggle Slot")) {
 			currentSlot = (currentSlot == 1)? 0 : 1;
+			WorldAudioManager.Instance.PlaySwitchSlotSense();
 		}
 		
 		if (Input.GetButtonDown("Sight")) {
@@ -187,7 +189,7 @@ public class PlayerController : MonoBehaviour {
 	
 	private void SetSenseToCurrentSlot (SenseController.SenseType sense) {
 		int otherSlot = (currentSlot == 1)? 0 : 1;
-		if (activeSenses[currentSlot] == sense && activeSenses[otherSlot] != SenseController.SenseType.None) {
+		if (activeSenses[currentSlot] == sense) {
 			senseController.SetSenseEnabled(activeSenses[currentSlot], false);
 			activeSenses[currentSlot] = SenseController.SenseType.None;
 		} else if (activeSenses[otherSlot] != sense) {

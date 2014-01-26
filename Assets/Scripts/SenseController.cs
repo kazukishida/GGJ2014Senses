@@ -23,7 +23,8 @@ public class SenseController : MonoBehaviour {
 	private Material disabledSkybox;
 	
 	void Awake () {
-		//SetSenseEnabled(SenseType.Sight, false);
+		Debug.Log("Started Sense Controller");
+
 		SightGO = transform.Find("SightCamera").gameObject;
 		HearingGO = transform.Find("HearingCamera").gameObject;
 		ScentGO = transform.Find("ScentCamera").gameObject;
@@ -67,6 +68,7 @@ public class SenseController : MonoBehaviour {
 				break;
 			case SenseType.Hearing:
 				HearingGO.SetActive(active);
+				WorldAudioManager.Instance.ToggleAudioSource(active);
 				break;
 			case SenseType.Scent:
 				ScentGO.SetActive(active);
@@ -81,6 +83,7 @@ public class SenseController : MonoBehaviour {
 				Debug.Log ("SetSenseEnabled: Invalid sense");
 				break;
 		}
+		WorldAudioManager.Instance.PlayLockSense();
 	}
 
 	/*
