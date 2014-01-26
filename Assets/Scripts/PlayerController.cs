@@ -112,15 +112,17 @@ public class PlayerController : MonoBehaviour {
 					//Debug.DrawRay(sightCamera.position, sightCamera.TransformDirection(Vector3.forward));
 					if(Physics.Raycast(sightCamera.transform.position, sightCamera.transform.TransformDirection(Vector3.forward), out hit, 2)) {
 						carryingObject = hit.transform.root.gameObject.GetComponentInChildren<InteractableObject>();
-						if(carryingObject.canCarry) {
-							if(carryingObject != null) {
-								hit.transform.parent = PlayerController.Instance.transform;
-								carryingObject.collider.enabled = false;
-								carryingObject.rigidbody.useGravity = false;
-								Debug.Log ("hurrdurr");
+						if (carryingObject != null) {
+							if(carryingObject.canCarry) {
+								if(carryingObject != null) {
+									hit.transform.parent = PlayerController.Instance.transform;
+									carryingObject.collider.enabled = false;
+									carryingObject.rigidbody.useGravity = false;
+									Debug.Log ("hurrdurr");
+								}
+							} else if(carryingObject.canActivate) {
+								carryingObject.activate();
 							}
-						} else if(carryingObject.canActivate) {
-							carryingObject.activate();
 						}
 					}
 				}
