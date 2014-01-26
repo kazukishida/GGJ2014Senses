@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour {
 	
 	public float defaultDeathBound = -7;
 	public Dictionary<int, float> deathBoundOverride;
+
+	public bool isCarrying = false;
 	
 	private Transform _cacheTransform;
 	private bool killed;
@@ -107,8 +109,15 @@ public class PlayerController : MonoBehaviour {
 			Application.LoadLevel(0);
 		}
 
+		if (Input.GetButtonDown("Reset Level")) {
+			Application.LoadLevel(Application.loadedLevel);
+		}
+
 		if (Input.GetButtonDown("Interaction")) {
 			if(IsSenseActive(SenseController.SenseType.Feeling)) {
+				if (isCarrying) {
+					isCarrying = false;
+				}
 				RaycastHit hit;
 				Transform sightCamera = transform.root.FindChild("SenseGroup").FindChild("SightCamera");
 				//Debug.DrawRay(sightCamera.position, sightCamera.TransformDirection(Vector3.forward));
@@ -119,7 +128,8 @@ public class PlayerController : MonoBehaviour {
 						if (carryingObject != null) {
 							if(carryingObject.canCarry) {
 								if(carryingObject != null) {
-									hit.transform.parent = PlayerController.Instance.transform;
+									isCarrying = !isCarrying;
+									carryingObject.transform.parent = PlayerController.Instance.transform;
 									carryingObject.collider.enabled = false;
 									carryingObject.rigidbody.useGravity = false;
 									Debug.Log ("hurrdurr");
@@ -130,18 +140,24 @@ public class PlayerController : MonoBehaviour {
 						}
 					}
 				}
+
+				else if (!isCarrying){
+					Debug.Log ("drop");
+					//carryingObject.rigidbody.useGravity = true;
+					if(carryingObject != null) {
+						carryingObject.collider.enabled = true;
+						carryingObject.rigidbody.useGravity = true;
+						carryingObject.transform.parent = null;
+						carryingObject.rigidbody.WakeUp();
+						carryingObject = null;
+					} else {
+						Debug.Log("YIURSD");
+					}
+				}
 			}
 		}
 
-		if (Input.GetButtonUp("Interaction")){
-			//carryingObject.rigidbody.useGravity = true;
-			if(carryingObject != null) {
-				carryingObject.collider.enabled = true;
-				carryingObject.rigidbody.useGravity = true;
-				carryingObject.transform.parent = null;
-				carryingObject = null;
-			}
-		}
+
 
 		RaycastHit echoHit = new RaycastHit();
 
