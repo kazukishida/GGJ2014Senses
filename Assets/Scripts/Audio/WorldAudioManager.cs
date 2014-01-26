@@ -16,6 +16,7 @@ public class WorldAudioManager : MonoBehaviour {
 	public AudioSource switchSenseSFX;
 	public AudioSource goalReachedSFX;
 	public AudioSource footstepSFX;
+	public AudioSource chimeSFX;
 	public float footstepSFXvariance = 0.2f;
 
 	public AudioSource[] distractionSounds;
@@ -59,6 +60,7 @@ public class WorldAudioManager : MonoBehaviour {
 			footstepSFX = transform.FindChild ("_sfx-footstep").audio;
 			changeSenseSFX = transform.FindChild("_sfx-lockSense").audio;
 			goalReachedSFX = transform.FindChild("_sfx-goalReached").audio;
+			chimeSFX = transform.FindChild("_sfx-chime").audio;
 
 			// adjustments
 			changeSenseSFX.pitch = 1.2f;
@@ -90,6 +92,11 @@ public class WorldAudioManager : MonoBehaviour {
 		goalReachedSFX.pitch = Random.Range (0.95f, 1.05f);
 		goalReachedSFX.Play();
 	}	
+
+	public void PlayChime() {
+		chimeSFX.pitch = Random.Range (0.95f, 1.05f);
+		chimeSFX.Play();
+	}
 
 	public void PlayLockSense(){
 		changeSenseSFX.Play ();
