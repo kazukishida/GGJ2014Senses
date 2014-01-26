@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 	public GameObject sightCamera;
@@ -20,6 +21,12 @@ public class PlayerController : MonoBehaviour {
 	private bool _captureCursor = true;
 
 	private InteractableObject carryingObject = null;
+	
+	public float defaultDeathBound = -7;
+	public Dictionary<int, float> deathBoundOverride;
+	
+	private Transform _cacheTransform;
+	private bool killed;
 
 	void Awake() {
 		_singleton = this;
@@ -41,11 +48,18 @@ public class PlayerController : MonoBehaviour {
 		currentSlot = 0;
 
 		mouseLooks = GetComponentsInChildren<MouseLook>();
+		
+		deathBoundOverride = new Dictionary<int, float>();
+		
+		_cacheTransform = this.transform;
+		//
+		//deathBoundOverride.Add ();
 	}
 
 	public void killPlayer() {
 		//Debug.Log("You died!");
-		Application.LoadLevel(Application.loadedLevel);
+		killed = true;
+		AutoFade.LoadLevel(Application.loadedLevel, 0.3f, 0.3f, Color.red);
 		//load checkpoint
 	}
 
@@ -173,8 +187,18 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-			
+		if (!killed) {
+			_checkDeath();
+		}
 		
+	}
+	
+	public void _checkDeath () {
+		float bound = deathBoundOverride.ContainsKey(Application.loadedLevel)?
+						deathBoundOverride[Application.loadedLevel] : defaultDeathBound;
+		if (_cacheTransform.position.y < bound) {
+			killPlayer ();
+		}
 	}
 	
 	public bool IsSenseActive (SenseController.SenseType sense) {
