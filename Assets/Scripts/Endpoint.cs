@@ -10,5 +10,6 @@ public class Endpoint : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		AutoFade.LoadLevel(Application.loadedLevel + 1, 0.5f, 0.2f, Color.white);
+		WorldAudioManager.Instance.PlayGoalReached();
 	}
 }

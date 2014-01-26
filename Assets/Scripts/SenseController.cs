@@ -83,6 +83,7 @@ public class SenseController : MonoBehaviour {
 				Debug.Log ("SetSenseEnabled: Invalid sense");
 				break;
 		}
+		WorldAudioManager.Instance.PlayLockSense();
 	}
 
 	/*
