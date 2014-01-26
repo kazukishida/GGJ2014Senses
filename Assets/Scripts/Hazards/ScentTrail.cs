@@ -6,7 +6,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(SplinePath))]
 public class ScentTrail : MonoBehaviour {
 	public SplinePath splinePath;
-	public LineRenderer lineRenderer;
+//	public LineRenderer lineRenderer;
 	public GameObject smokePrefab;
 	
 	private IEnumerable<Vector3> nodes;
@@ -15,11 +15,11 @@ public class ScentTrail : MonoBehaviour {
 		splinePath = GetComponent<SplinePath>();
 		nodes = splinePath.GetSplinePath();
 		
-		lineRenderer = GetComponent<LineRenderer>();
-		
-		if (lineRenderer != null) {
-			lineRenderer.SetVertexCount(Mathf.FloorToInt(splinePath.GetNodeCount()));
-		}
+//		lineRenderer = GetComponent<LineRenderer>();
+//		
+//		if (lineRenderer != null) {
+//			lineRenderer.SetVertexCount(Mathf.FloorToInt(splinePath.GetNodeCount()));
+//		}
 
 		GenerateSmoke();
 //		int numParticles = (splinePath.GetNodeCount() / splinePath.betweenNodeCount) * 10;
@@ -39,9 +39,9 @@ public class ScentTrail : MonoBehaviour {
 		Vector3 segmentStart = firstPoint;
 		
 		int i = 0;
-		if(lineRenderer != null) {
-			lineRenderer.SetPosition(i++, segmentStart);
-		}
+//		if(lineRenderer != null) {
+//			lineRenderer.SetPosition(i++, segmentStart);
+//		}
 		
 		sequence.MoveNext(); // skip the first point
 		
@@ -58,9 +58,9 @@ public class ScentTrail : MonoBehaviour {
 			/*
 			 * Line Renderer
 			 */
-			if(lineRenderer != null) {
-				lineRenderer.SetPosition(i++, sequence.Current);
-			}
+//			if(lineRenderer != null) {
+//				lineRenderer.SetPosition(i++, sequence.Current);
+//			}
 
 			segmentStart = sequence.Current;
 			// prevent infinite loop, when attribute loop == true
