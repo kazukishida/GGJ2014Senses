@@ -6,36 +6,12 @@ public class RandomScentAdder : MonoBehaviour {
 	private GameObject smokePrefab;
 
 	void Start () {
-	
 		smokePrefab = Resources.Load<GameObject>("Prefabs/Particles/SmokeSprite");
 
 		// 1) Get the bounds of the level-ish
 		RaycastHit hit;
 		float minX, minY, maxX, maxY;
 		float tx, ty;
-
-		/*
-		tx = 0;
-		while (Physics.Raycast(new Vector3(tx, 10, 0f), Vector3.down, out hit, Mathf.Infinity))
-			tx += Random.Range(2f, 4f);
-		maxX = tx;
-		
-		tx = 0;
-		while (Physics.Raycast(new Vector3(tx, 10, 0f), Vector3.down, out hit, Mathf.Infinity))
-			tx -= Random.Range(2f, 4f);
-		minX = tx;
-		
-		ty = 0;
-		while (Physics.Raycast(new Vector3((minX + maxX) / 2, 10, ty), Vector3.down, out hit, Mathf.Infinity))
-			ty += Random.Range(2f, 4f);
-		maxY = ty;
-		
-		ty = 0;
-		while (Physics.Raycast(new Vector3((minX + maxX) / 2, 10, ty), Vector3.down, out hit, Mathf.Infinity))
-			ty -= Random.Range(2f, 4f);
-		minY = ty;
-		*/
-
 		minX = minY = 1000000f;
 		maxX = maxY = -1000000f;
 		GameObject[] tg = GameObject.FindGameObjectsWithTag("Floor");
