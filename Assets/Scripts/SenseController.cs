@@ -75,6 +75,12 @@ public class SenseController : MonoBehaviour {
 				break;
 			case SenseType.Feeling:
 				FeelingGO.SetActive(active);
+				if(!active && PlayerController.Instance.carryingObject != null) {
+					PlayerController.Instance.carryingObject.collider.enabled = true;
+					PlayerController.Instance.carryingObject.rigidbody.useGravity = true;
+					PlayerController.Instance.carryingObject.transform.parent = null;
+					PlayerController.Instance.carryingObject = null;
+				}
 				if (buttonHandler != null) {
 					buttonHandler.enabled = active;
 				}

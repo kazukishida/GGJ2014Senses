@@ -11,6 +11,7 @@ WorldAudioManager.cs
 public class WorldAudioManager : MonoBehaviour {
 
 	public AudioSource ambience;
+	public float ambienceVolume = 0.1f;
 
 	public AudioSource changeSenseSFX;
 	public AudioSource switchSenseSFX;
@@ -53,7 +54,7 @@ public class WorldAudioManager : MonoBehaviour {
 		// --- AWAKE INITZZ HERE
 		try {
 			ambience = transform.FindChild("_amb-source").audio;
-			ambience.volume=0.5f;
+			ambience.volume = ambienceVolume;
 			ambience.loop = true;
 			ambience.Play();
 
@@ -164,6 +165,11 @@ public class WorldAudioManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
+		if(PlayerController.Instance.IsSenseActive(SenseController.SenseType.Hearing)){
+			ambience.volume = ambienceVolume + 0.2f;
+		} else {
+			ambience.volume = ambienceVolume;
+		}
 	}
 }
