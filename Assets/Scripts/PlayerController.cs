@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject hearingCamera;
 
 	public AudioClip voiceClip;
+	public float echoDistance = 0f;
 
 	public bool isAlive = true;
 
@@ -116,29 +117,54 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
+		RaycastHit echoHit = new RaycastHit();
+
 		if(Input.GetButtonDown("Shout")) {
-			//GameObject hearingCamera = GameObject.Find("HearingCamera");
+			Transform sightCamera = transform.root.FindChild("SenseGroup").FindChild("SightCamera");
+
+			Physics.Raycast(sightCamera.position, sightCamera.TransformDirection(Vector3.forward), out echoHit, Mathf.Infinity);
+			echoDistance = echoHit.distance;
 
 			audio.clip = Microphone.Start("", false, 99, AudioSettings.outputSampleRate);
-
-
+			
+			
 		}
-
+		
 		if(Input.GetButtonUp("Shout")) {
-
+			
 			Microphone.End("");
-
+			Debug.Log(echoDistance);
 			voiceClip = AudioClip.Create("MyVoice", 44100, 1, 44100, true, false);
+			AudioEchoFilter echoFilter = GameObject.Find("Player").GetComponentInChildren<AudioEchoFilter>();
+
+			if(echoDistance >= 10f && echoDistance <= 15f) {
+				echoFilter.enabled = true;
+				echoFilter.wetMix = 0.1f;
+				echoFilter.decayRatio = 0.1f;
+			} else if(echoDistance > 15f && echoDistance <= 20f) {
+				echoFilter.enabled = true;
+				echoFilter.wetMix = 0.1f;
+				echoFilter.decayRatio = 0.4f;
+			} else if(echoDistance > 20f) {
+				echoFilter.enabled = true;
+				echoFilter.wetMix = 0.1f;
+				echoFilter.decayRatio = 0.75f;
+			} else {
+				echoFilter.enabled = false;
+			}
 
 			float[] samples = new float[44100];
 			audio.clip.GetData(samples, 0);
 			
 			voiceClip.SetData(samples, 0);
 			audio.clip = voiceClip;
-
+			
 			audio.PlayOneShot(voiceClip);
 
+			echoDistance = 0f;
+			
 		}
+
 			
 		
 	}
