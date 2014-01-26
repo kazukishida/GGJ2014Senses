@@ -13,7 +13,7 @@ public class Loader : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 1f;
 		StartCoroutine (Fade (0.5f, Color.black));
-		while(!PermissionsController.Instance.enabled) {}
+		//yield return PermissionsController.Instance;
 		Invoke ("Load", 3f);
 	}
 

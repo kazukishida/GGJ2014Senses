@@ -5,21 +5,23 @@ public class PermissionsController : MonoBehaviour {
 	private static PermissionsController _singleton;
 	private bool canUseMic = false;
 
+	void Awake() {
+		_singleton = this;
+	}
+
 	public static PermissionsController Instance {
 		get {
-			if (_singleton == null){
-				Screen.lockCursor = false;
-				Debug.Log("in here!");
-				GameObject go = Instantiate (Resources.Load<GameObject>("Prefabs/Config/PermissionsControllerObject")) as GameObject;
-				DontDestroyOnLoad(go);
-				_singleton = go.GetComponent<PermissionsController>();
-			}
+			DontDestroyOnLoad(GameObject.Find("PermissionsControllerObject"));
 			return _singleton;
 		}
 	}
 
 	IEnumerator Start() {
 		Screen.lockCursor = false;
+		Loader[] loaders = GameObject.FindObjectsOfType<Loader>();
+		foreach(Loader l in loaders) {
+			l.enabled = false;
+		}
 		yield return Application.RequestUserAuthorization(UserAuthorization.WebCam | UserAuthorization.Microphone);
 		if (Application.HasUserAuthorization(UserAuthorization.WebCam | UserAuthorization.Microphone)) {
 			canUseMic = true;
@@ -28,7 +30,10 @@ public class PermissionsController : MonoBehaviour {
 		}
 
 		Screen.lockCursor = true;
-		this.enabled = false;
+
+		foreach(Loader l in loaders) {
+			l.enabled = true;
+		}
 	}
 
 	public bool CanUseMic {
