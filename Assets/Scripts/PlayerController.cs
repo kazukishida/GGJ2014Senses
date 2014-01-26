@@ -201,11 +201,11 @@ public class PlayerController : MonoBehaviour {
 			}
 			activeSenses[currentSlot] = sense;
 			senseController.SetSenseEnabled(sense, true);
-		} else {
+		} /*else {
 			SenseController.SenseType tempSense = activeSenses[0];
 			activeSenses[0] = activeSenses[1];
 			activeSenses[1] = tempSense;
-		}
+		}*/
 	}
 
 	public bool CaptureCursor {
