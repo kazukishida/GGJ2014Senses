@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour {
 
 		RaycastHit echoHit = new RaycastHit();
 
-		if(Application.HasUserAuthorization(UserAuthorization.Microphone) | !Application.isWebPlayer) {
+		if(Application.HasUserAuthorization(UserAuthorization.Microphone) || !Application.isWebPlayer) {
 			if(Input.GetButtonDown("Shout")) {
 				if(IsSenseActive(SenseController.SenseType.Hearing)) {
 					Transform sightCamera = transform.root.FindChild("SenseGroup").FindChild("SightCamera");

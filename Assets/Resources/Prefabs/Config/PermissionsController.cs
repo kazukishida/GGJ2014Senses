@@ -3,22 +3,14 @@ using System.Collections;
 
 public class PermissionsController : MonoBehaviour {
 	IEnumerator Start() {
-		if(Application.isWebPlayer) {
+		if(!Application.isWebPlayer) {
 			this.enabled = false;
 			yield return 0;
+		} else {
+			Screen.lockCursor = false;
+			yield return Application.RequestUserAuthorization(UserAuthorization.WebCam | UserAuthorization.Microphone);
+			Screen.lockCursor = true;
 		}
-
-		Screen.lockCursor = false;
-		Loader[] loaders = GameObject.FindObjectsOfType<Loader>();
-		foreach(Loader l in loaders) {
-			l.enabled = false;
-		}
-		yield return Application.RequestUserAuthorization(UserAuthorization.WebCam | UserAuthorization.Microphone);
-
-		Screen.lockCursor = true;
-
-		foreach(Loader l in loaders) {
-			l.enabled = true;
-		}
+		Application.LoadLevel(1);
 	}
 }

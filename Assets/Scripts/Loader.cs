@@ -13,7 +13,6 @@ public class Loader : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 1f;
 		StartCoroutine (Fade (0.5f, Color.black));
-		//yield return PermissionsController.Instance;
 		Invoke ("Load", 3f);
 	}
 
@@ -45,6 +44,8 @@ public class Loader : MonoBehaviour {
 	}
 
 	private void Load() {
-		AutoFade.LoadLevel (1, 0.5f, 0.5f, Color.black);
+		Debug.Log("in here");
+		AutoFade.LoadLevel (2, 0.5f, 0.5f, Color.black);
+		//Application.LoadLevel("Level1");
 	}
 }
